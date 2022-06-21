@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LiberacaoDeCredito
 {
-  internal class LiberacaoDeCredito
+  public class LiberacaoDeCredito
   {
     public static int? ConverteNumeroParaString(string Numero)
     {
@@ -56,23 +57,47 @@ namespace LiberacaoDeCredito
       }
 
       Console.WriteLine("Digite a Data do Vencimento:exemplo:09/09/1992");
-      string inputAno = Console.ReadLine();
-      var DataLimpa = ValidaData(inputAno);
+      string dataVencimento = Console.ReadLine();
+      string teste = "";
 
-      Console.WriteLine($"Digite a Data do Vencimento:exemplo:{DataLimpa}");
+      if (ValidaData(dataVencimento))
+      {
+        teste = ConverteData(dataVencimento);
+      }
+      else
+      {
+        Console.WriteLine("Data esta invalida");
+      }
+
+      Console.WriteLine($"1- Credito Direto - Taxa de 2% ao mes{teste}");
+
+
+
 
 
 
 
     }
 
-    public static string ValidaData(string Date)
+    public static bool ValidaData(string Date)
     {
-      String result = DateTime
-        .ParseExact(Date, "MM/dd/yyyy", CultureInfo.InvariantCulture)
-        .ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+      if (!DateTime.TryParse(Date, new CultureInfo("pt-BR"), DateTimeStyles.None, out var data))
+      {
 
-      return result;
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
+
+    public static string ConverteData(string Date)
+    {
+      DateTime resultado = DateTime.ParseExact(Date, "dd/MM/yyyy", null);
+      var formatadaParaBanco = String.Format("{0:yyyy-mm-dd}", resultado);
+      DateTime formatadaDatetime = DateTime.ParseExact(formatadaParaBanco, "yyyy-MM-dd", null);
+      return formatadaParaBanco;
     }
 
     public static void MenuCredito()
