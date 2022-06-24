@@ -79,7 +79,6 @@ namespace LiberacaoDeCredito
         Console.WriteLine("Pressione Qualquer Tecla Para Retornar ao Menu");
         Console.ReadKey();
       }
-
     }
 
     public static string NormalizaçãoDecimal(decimal Numero)
@@ -87,7 +86,6 @@ namespace LiberacaoDeCredito
       Decimal NumeroSemArredondamento = Math.Truncate(Numero * 100) / 100;
       return NumeroSemArredondamento.ToString();
     }
-
 
     public static void ValidaData(string Date)
     {
