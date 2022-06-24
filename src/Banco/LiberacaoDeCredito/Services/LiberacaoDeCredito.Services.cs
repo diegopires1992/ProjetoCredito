@@ -66,19 +66,19 @@ namespace LiberacaoDeCredito
 
       DateTime DataConvertida = ConverteData(DataVencimento);
 
-      VerificaDataVencimento(DataConvertida);
-
-      var TotalComJurosCompostos = CalculaJurosCompostos(ValorDoCredito, NumeroParcelas, OpcaoDeCredito);
-      Console.WriteLine("");
-      Console.WriteLine("");
-      Console.WriteLine(" Status do crédito : APROVADO");
-      Console.WriteLine($" Valor total com juros : {NormalizaçãoDecimal(TotalComJurosCompostos)}");
-      Console.WriteLine($" Valor do Juros : {NormalizaçãoDecimal(TotalComJurosCompostos - Convert.ToDecimal(ValorDoCredito))}");
-      Console.WriteLine("");
-      Console.WriteLine("");
-      Console.WriteLine("Pressione Qualquer Tecla Para Retornar ao Menu");
-      Console.ReadKey();
-
+      if (VerificaDataVencimento(DataConvertida))
+      {
+        var TotalComJurosCompostos = CalculaJurosCompostos(ValorDoCredito, NumeroParcelas, OpcaoDeCredito);
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine(" Status do crédito : APROVADO");
+        Console.WriteLine($" Valor total com juros : {NormalizaçãoDecimal(TotalComJurosCompostos)}");
+        Console.WriteLine($" Valor do Juros : {NormalizaçãoDecimal(TotalComJurosCompostos - Convert.ToDecimal(ValorDoCredito))}");
+        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Pressione Qualquer Tecla Para Retornar ao Menu");
+        Console.ReadKey();
+      }
 
     }
 
@@ -101,7 +101,7 @@ namespace LiberacaoDeCredito
       }
     }
 
-    public static void VerificaDataVencimento(DateTime DataConvertida)
+    public static bool VerificaDataVencimento(DateTime DataConvertida)
     {
       DateTime MaisQuarenta = DateTime.Today.AddDays(40);
       DateTime MaisQuinzeDias = DateTime.Today.AddDays(15);
@@ -110,8 +110,9 @@ namespace LiberacaoDeCredito
       {
         Console.WriteLine($"Data para solicitação pode ser atendida entre  {MaisQuinzeDias}  e {MaisQuarenta} ");
         Console.WriteLine("  A data do primeiro vencimento sempre será no mínimo D+15 (Dia atual + 15 dias), e no máximo,D+40 (Dia atual + 40 dias)");
-        return;
+        return false;
       }
+      return true;
     }
 
     public static DateTime ConverteData(string Date)
