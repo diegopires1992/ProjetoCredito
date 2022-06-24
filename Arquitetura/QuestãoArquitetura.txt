@@ -1,0 +1,35 @@
+3. Questão conceitual, escreva em detalhes ou diagramas como você montaria uma arquitetura para 
+o cenário abaixo, informando as tecnologias, arquitetura, e o que mais achar necessário.
+Em tempos de expansão digital, sua empresa foi contratada para desenhar uma arquitetura moderna 
+que sustente o crescimento digital e de vários novos canais, e também tenha formas de manter o 
+legado funcionando.
+Descreva ou desenhe o que e como você utilizaria para suportar este crescimento, tendo em vista 
+que é necessário uma arquitetura que agregue os meios de comunicação com Mainframe, e que 
+todos os sistemas web possam se comunicar entre eles sem a reescrita de códigos.
+Todos os sistemas são extremamente críticos e de alta performance, também contando com um 
+volume consideravelmente alto de dados sendo transacionados a todo tempo.
+Comente também como você desenharia a solução para implantação deste cenário, visando que 
+quanto menor a dependência com áreas de operação para executar a implantação na mão, mais 
+produtivo e assertivo será a empresa.
+
+
+Para suportar o crescimento continuo do sistema tenho em visto o modelo arquitetural Kappa com microserviços.
+
+A arquitetura de kappa foi proposta por Jay Kreps como uma alternativa à arquitetura de lambda. 
+Ela tem as mesmas metas básicas da arquitetura de lambda, mas com uma diferença importante: 
+todos os dados fluem por um único caminho, usando um sistema de processamento de fluxo.
+
+Tecnologias:
+Microserviços:
+Com os Microserviços vamos agregar flexibilidade, escalabilidade , Capacidade de Manutenção.Podemos utilizar o linguagem c#.
+Mensageria:
+Com a ajudada de uma tecnologia de mensageria Kafka Connect + Streams temos uma arquitetura voltada a evento onde que Kafka será um hub para demogratização de dados e integração no modelo kappa.
+Banco de dados:
+Com flexibilização dos dados podemos utilizar tanto banco relacionais(sqlserver,oracle) ou não relacionais(mongodb,redis,Azure Cosmos DB)
+
+Fonte:
+https://medium.com/sagar-explains-azure-and-analytics-azure-series/data-processing-architecture-lambda-and-kappa-ebb54029c893
+https://docs.microsoft.com/pt-br/azure/architecture/data-guide/big-data/
+https://www.youtube.com/watch?v=bssgpN34ATs&t=1706s
+
+ 
